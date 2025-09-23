@@ -7,15 +7,15 @@ from std_msgs.msg import String
 class MinimalPublisher(Node):
 
     def __init__(self):
-        super().__init__('minimal_publisher')  #Used to inherit tge methdos from the Node class
-        self.publisher_ = self.create_publisher(String, 'topic', 10)
+        super().__init__('minimal_publisher')  #Used to inherit the methdos from the Node class
+        self.publisher_ = self.create_publisher(String, 'topic', 10) # 'topic' is the name of the topic to which the msg is getting published
         timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.timer = self.create_timer(timer_period, self.timer_callback) # topic name to be set over here
         self.i = 0
 
     def timer_callback(self):
-        msg = String()
-        msg.data = 'Hello World: %d' % self.i
+        msg = String()  #making an object of the string class
+        msg.data = 'Hello World: %d' % self.i #sendong a string message along with a counter
         self.publisher_.publish(msg)
         self.get_logger().info('Publishing: "%s"' % msg.data)
         self.i += 1
